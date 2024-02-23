@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+
+    <title>Virtual Tour</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      h1{
+        color:darkslateblue;  
+        text-align: center;
+        font-size: x-large;
+        font-family:'Times New Roman';
+        font-weight: bold ;
+    }
+     
+    p{
+        color: black;
+        text-align: justify;
+        padding: 10px;
+        margin: auto ;
+        width: 90%;
+        font-family:'Times New Roman';
+        line-height: 30px;
+        font-weight: bold ;
+    }
+       
+    </style>
+
+    <script src="https://js.arcgis.com/4.28/"></script>
+  
+    <script>
+      // // source: https://developers.arcgis.com/javascript/latest/sample-code,the development of an idea of creating a story is owned by Kabir.
+      require(["esri/views/MapView", "esri/widgets/Legend", "esri/widgets/Expand", "esri/WebMap", "esri/widgets/ScaleBar",
+      "esri/widgets/Search"],
+      (
+        MapView,
+        Legend,
+        Expand,
+        WebMap,
+        ScaleBar, 
+        Search
+      ) => {
+        const webmap = new WebMap({
+          portalItem: {
+            // my webmap id
+            id: "10574d99c5b84324b1262b29e64e76bc"
+          }
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: webmap,
+          zoom: 2,
+          centre:[ -105.48114556341208,46.97092264921188] 
+        });
+
+        // adding a legend  
+      // https://developers.arcgis.com/javascript/latest/sample-code/widgets-legend-card/
+        const legend = new Expand({
+          content: new Legend({
+            view: view,
+            style: "classic"  
+          }),
+          view: view,
+          expanded: true
+        });
+        view.ui.add(legend, "bottom-right");
+        // adding scale bar
+        const scaleBar = new ScaleBar({
+        view: view,
+        unit: "metric"
+      });
+
+      view.ui.add(scaleBar, {
+        position: "bottom-left"
+      });
+        // adding search bar
+      const searchWidget = new Search({
+        view: view
+      });
+
+      view.ui.add(searchWidget, {
+        position: "top-right"
+      });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="viewDiv"></div> 
+    <div class="header">
+      <h1>"Get ready to embark on a thrilling adventure with Map Match-Up"</h1>
+      <p>In this exciting game, We'll discover the diverse provinces of Canada and learn all about their special features. From the snowy landscapes of Alberta to the stunning coastlines of Nova Scotia, each province has its own unique charm waiting to be explored. Use your keen observation skills to match the provinces with their correct places on the map. Can you find Quebec with its French-speaking cities or locate Manitoba with its vast prairies? Join the fun and become a geography expert with Map Match-Up.</p>
+    <p>Hint 1:Remember to use legend with different colord to guide you. Each color represents a different province, making it easier to match them up on the map.
+       Hint 2:If you ever need some extra help, just click on the provinces for a pop-up description to learn more about them. With your keen eye and the help of these hints, you'll soon become a master of Canadian geography in no time! Happy exploring!
+    </p>
+    </body>
+</html>
